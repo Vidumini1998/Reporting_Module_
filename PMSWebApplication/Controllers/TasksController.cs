@@ -1,12 +1,8 @@
-﻿using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using PMSWebApplication.Models;
-using CrystalDecisions.CrystalReports.Engine;
-using System.IO;
 
 namespace PMSWebApplication.Controllers
 {
@@ -129,5 +125,53 @@ namespace PMSWebApplication.Controllers
             base.Dispose(disposing);
         }
     }
+
+    //    public async Task<ActionResult> ExportDueAmountReport()
+    //    {
+    //        //empEntities context = new empEntities();
+
+    //        ReportDocument rd = new ReportDocument();
+    //        rd.Load(Path.Combine(Server.MapPath("//Reports//PaymentReport.rpt")));
+    //        //rd.SetDataSource(db.Payments.Select(c => new
+    //        //{
+    //        //    ProjectId = c.ProjectId,
+    //        //    TaskId = c.TaskId
+    //        //}).ToList());
+
+    //        var project = await db.Projects.ToListAsync();
+
+    //        //var project = await db.Payments.ToListAsync();
+    //        //  p.ProjectName, t.TaskName, y.PayDate, y.PaymentAmount, y.InvoiceNo
+    //        //foreach (var task in project)
+    //        //{
+    //        rd.SetDataSource(db.Payments/*.Where(x => x.ProjectId == task.Id)*/.Select(c => new
+    //        {
+    //            ProjectId = c.Project.ProjectName.ToString(),
+    //            TaskId = c.Task.TaskName.ToString(),
+    //            PayDiscription = c.PayDiscription,
+    //            TaskStages = c.PayDate.ToString(),
+    //            InvoiceNo = c.InvoiceNo.ToString(),
+    //            PayMethod = c.PaymentAmount.ToString()
+
+    //        }).ToList());
+
+    //        //}
+
+    //        Response.Buffer = false;
+    //        Response.ClearContent();
+    //        Response.ClearHeaders();
+
+
+    //        rd.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
+    //        rd.PrintOptions.ApplyPageMargins(new CrystalDecisions.Shared.PageMargins(5, 5, 5, 5));
+    //        rd.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperA5;
+
+    //        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+    //        stream.Seek(0, SeekOrigin.Begin);
+
+    //        return File(stream, "application/pdf", "PaymentReport.pdf");
+    //    }
+
+
 
 }

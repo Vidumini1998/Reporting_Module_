@@ -36,6 +36,8 @@ namespace PMSWebApplication.Controllers
             return View(await payments.ToListAsync());
         }
 
+
+        //Priority Report
         public async Task<ActionResult> PriorityReport()
         {
             var tasks = await db.Tasks.Where(x => x.Deadline > DateTime.Today).ToListAsync();
@@ -58,6 +60,8 @@ namespace PMSWebApplication.Controllers
 
         }
 
+
+        //DeadlineListReport
         public async Task<ActionResult> DeadlineListReport()
         {
             var tasks = await db.Tasks.Where(x => x.Deadline > DateTime.Today).ToListAsync();
@@ -80,6 +84,7 @@ namespace PMSWebApplication.Controllers
 
         }
 
+        //TaskStatusReport
         public async Task<ActionResult> TaskStatusReport()
         {
             var tasks = await db.Tasks.Where(x => x.Deadline > DateTime.Today).ToListAsync();
@@ -105,6 +110,7 @@ namespace PMSWebApplication.Controllers
 
         }
 
+        //ExportTaskStatusReport
         public ActionResult ExportTaskStatusReport()
         {
 
@@ -168,6 +174,7 @@ namespace PMSWebApplication.Controllers
         //    return File(stream, "application/pdf", "TaskstatusReport.pdf");
         //}
 
+        //DueAmountReport
         public async Task<ActionResult> DueAmountReport()
         {
             var tasks = await db.Tasks.Where(x => x.Deadline > DateTime.Today).ToListAsync();
@@ -526,7 +533,7 @@ namespace PMSWebApplication.Controllers
 
         }
 
-        public async Task<ActionResult> ExportPaymentHistoryReport()
+        public async Task<ActionResult> ExportPaymentHistoryReport1()
         {
             //empEntities context = new empEntities();
 
@@ -544,13 +551,13 @@ namespace PMSWebApplication.Controllers
             //  p.ProjectName, t.TaskName, y.PayDate, y.PaymentAmount, y.InvoiceNo
             foreach (var task in project)
             {
-                rd.SetDataSource(db.Payments.Where(x => x.ProjectId == task.Id).Select(c => new
+                rd.SetDataSource(db.Payments./*Where(x => x.ProjectId == task.Id).*/Select(c => new
                 {
-                    ProjectId = c.Project.ProjectName.ToString(),
-                    TaskId = c.Task.TaskName.ToString(),
+                    ProjectId = c.ProjectId.ToString(),
+                    TaskId = c.TaskId.ToString(),
                     InvoiceNo = c.InvoiceNo.ToString(),
                     PayDiscription = c.PaymentAmount.ToString(),
-                    PayMethod = c.PayDate,
+                    PayMethod = c.PayDate.ToString()
 
                 }).ToList());
 
@@ -614,12 +621,12 @@ namespace PMSWebApplication.Controllers
         //}
 
 
-        public async Task<ActionResult> ExportDueAmountReport()
+        public async Task<ActionResult> ExportPaymentHistoryReport()
         {
             //empEntities context = new empEntities();
 
             ReportDocument rd = new ReportDocument();
-            rd.Load(Path.Combine(Server.MapPath("//Reports//PaymentReport.rpt")));
+            rd.Load(Path.Combine(Server.MapPath("//Reports//PaymentHistoryReport.rpt")));
             //rd.SetDataSource(db.Payments.Select(c => new
             //{
             //    ProjectId = c.ProjectId,
@@ -657,7 +664,7 @@ namespace PMSWebApplication.Controllers
                 Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
                 stream.Seek(0, SeekOrigin.Begin);
 
-                return File(stream, "application/pdf", "PaymentReport.pdf");
+                return File(stream, "application/pdf", "PaymentHistoryReport.pdf");
             }
 
 

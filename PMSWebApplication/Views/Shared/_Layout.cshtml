@@ -18,19 +18,23 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Project Management System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Project Management System", "Login", "Account", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Attachments", "Create", "Attachments")</li>
-                    @if (User.IsInRole(ApplicationUserRoles.Administrator))
+
+                    
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+
+                    if (User.IsInRole(ApplicationUserRoles.Administrator))
                     {
                         <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
                         <li>@Html.ActionLink("Payments", "Index", "Payments")</li>
                         <li>@Html.ActionLink("Task", "Index", "Tasks")</li>
+                        <li>@Html.ActionLink("Attachments", "Create", "Attachments")</li>
+
 
                         <li>
                             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -56,11 +60,29 @@
                                             <li class="divider"></li>
                                             <li><a href="#">@Html.ActionLink("Payment History Report", "PaymentHistoryReport", "Reporting")</a></li>
                                         </ul>
-                                    </li>                                                                                   
+                                    </li>
                                 </ul>
                             </div>
                         </li>
                     }
+
+                    if (User.IsInRole(ApplicationUserRoles.Client))
+                    {
+
+                    
+                    
+                    
+                    }
+                    if (User.IsInRole(ApplicationUserRoles.Employee))
+                    {
+
+                    
+                    
+                    }
+
+                    }
+
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
