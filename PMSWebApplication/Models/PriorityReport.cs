@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PMSWebApplication.Models
 {
@@ -8,10 +9,13 @@ namespace PMSWebApplication.Models
 
         public DateTime? Deadline { get; set; }
 
+        [Display(Name = "Project Name")]
         public string ProjectName { get; set; }
 
+        [Display(Name = "Client Name")]
         public string ClientName { get; set; }
 
+        [Display(Name = "Priority No.")]
         public int? PriorityNo { get; set; }
     }
 }

@@ -23,67 +23,115 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-                    
+
                     @if (User.Identity.IsAuthenticated)
                     {
 
 
-                    if (User.IsInRole(ApplicationUserRoles.Administrator))
-                    {
-                        <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
-                        <li>@Html.ActionLink("Payments", "Index", "Payments")</li>
-                        <li>@Html.ActionLink("Task", "Index", "Tasks")</li>
-                        <li>@Html.ActionLink("Attachments", "Create", "Attachments")</li>
+                        if (User.IsInRole(ApplicationUserRoles.Administrator))
+                        {                       
+                            <li>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">@Html.ActionLink("Projects", "Index", "Projects")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Task", "Index", "Task")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("PriorityLists", "Index", "PriorityLists")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Attachments", "Create", "Attachments")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Updates", "Create", "Updates")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("BugFixes", "Create", "BugFixes")</a></li>
+                                                <li class="divider"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown ">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Payment<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">@Html.ActionLink("Add Payments", "Index", "Payments")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Upcoming Payments", "UpcommingPayments", "Payments")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Due Payments", "Duepayment", "Payments")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Task Wise Payments", "Taskwisepayment", "Payments")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Total Payments", "TotalPayment", "Payments")</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown ">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">@Html.ActionLink("Payment History Report", "PaymentHistoryReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Due Amount Report", "DueAmountReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Time Base Report", "MonthlyReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Upcoming Payment Report", "UpcomingPaymentReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Project Status Report", "ProjectStatusReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Task Status Report", "TaskStatusReport", "Reporting")</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="#">@Html.ActionLink("Deadline List Report", "DeadlineListReport", "Reporting")</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <ul class="nav navbar-nav">
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Client<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="#">@Html.ActionLink("Client Contact list", "Index", "Client Contact list")</a></li>
+                                                <li class="divider"></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                        }
+
+                        if (User.IsInRole(ApplicationUserRoles.Client))
+                        {
 
 
-                        <li>
-                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-                                <ul class="nav navbar-nav">
-                                    <li class="dropdown open">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reports<span class="caret"></span></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">@Html.ActionLink("Monthly Report", "MonthlyReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Due Amount Report", "DueAmountReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Upcoming Payment Report", "UpcomingPaymentReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Revenue Report", "RevenueReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Deadline List Report", "DeadlineListReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Project Status Report", "ProjectStatusReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Task Status Report", "TaskStatusReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Priority Report", "PriorityReport", "Reporting")</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">@Html.ActionLink("Payment History Report", "PaymentHistoryReport", "Reporting")</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+
+
+                        }
+                        if (User.IsInRole(ApplicationUserRoles.Employee))
+                        {
+
+
+
+                        }
+
                     }
 
-                    if (User.IsInRole(ApplicationUserRoles.Client))
-                    {
 
-                    
-                    
-                    
-                    }
-                    if (User.IsInRole(ApplicationUserRoles.Employee))
-                    {
-
-                    
-                    
-                    }
-
-                    }
-
-                    
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

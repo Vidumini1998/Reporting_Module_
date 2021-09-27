@@ -3,121 +3,45 @@
     ViewBag.Title = "DueAmountReport";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
-<h2>Due Amount Report</h2>
 
-@*<p>
-        @using (Html.BeginForm())
-
-
-        {
-            <div class="pull-right">
-                <table>
-    <a href="~/Views/Reporting/DueAmountReport.cshtml">~/Views/Reporting/DueAmountReport.cshtml</a> 
-                    <tr>
-                        <th>
-
-                            @Html.DropDownList("ProjectId", null, htmlAttributes: new { @class = "form-control" })
-
-                        </th>
-                        <th>
-                            <input type="submit" value="Search" />
-                        </th>
-                    </tr>
-                </table>
-            </div>
-            <table>
-                <tr>
-                    <th>
-                        @Html.ActionLink("Add Payment", "Create")
-                    </th>
-                </tr>
-            </table>
-
-        }
-    </p>*@
-
-
-@*<div >
-    @Html.ActionLink("Download", "ExportDueAmountReport", "Reporting", new { @class = "btn btn-primary" }, null)
+<div class="row" style="background-color:rgba(150, 199, 201, 0.65)">
+    <h2 class="col-md-6">Due Amount Report</h2>
 </div>
 
-<br />*@
-
-
-@*<p>
-    <a class="btn btn-primary" href="@Url.Action("ExportDueAmountReport")"> Download </a>
-</p>*@
-
-@*@using (Html.BeginForm())
-
-
-{
-
-
-    <div class="container">
-        <div class="row" style="margin-bottom:15px">
-            @Html.ActionLink("Due Amount Report", "DueAmountReport")
-        </div>
-        <div class="row" style="margin-bottom:15px">
-            <div class="col-xs-6 col-lg-3" style="padding-left:0">
-                @Html.DropDownList("ProjectId", (IEnumerable<SelectListItem>)ViewBag.DueAmountReport, "Select Project", htmlAttributes: new { @class = "form-control", @selected = "-1" })
-
-            </div>
-            <div class="">
-                <input class="btn btn-success" type="submit" value="Search" />
-            </div>
+    @*<div class="row" style="margin-top:20px">
+        <div class="col-xs-6 col-lg-3" style="padding-left:15px">
+            @Html.DropDownList("ProjectId", null, "All Projects", htmlAttributes: new { @class = "form-control", @selected = "-1", @id = "pId2" })
 
         </div>
+        <div>
+            <button type="button" class="btn btn-warning" onclick="downloadReport()"> Download Report </button>
+        </div>
+    </div>
+*@
+
+
+@*<div class="row" style="margin-bottom:15px">
+    <div class="col-xs-6 col-lg-3" style="padding-left:15px">
+        @Html.DropDownList("ProjectId", null, "All Projects", htmlAttributes: new { @class = "form-control", @selected = "-1", @id = "pId" })
 
     </div>
-
-
-
-}*@
-
-@*using (Html.BeginForm())
-
-
-    {
-
-
-<div class="container">
-    <div class="row" style="margin-bottom:15px">
-        @Html.ActionLink("Add Payment", "Create")
-    </div>
-
-    <div class="row" style="margin-bottom:15px">
-        <div class="col-xs-6 col-lg-3" style="padding-left:0">
-            @Html.DropDownList("ProjectId", null, "Select Project", htmlAttributes: new { @class = "form-control", @selected = "-1" })
-
-
-        </div>
-        <div class="">
-            <input class="btn btn-success" type="submit" value="Search" />
-        </div>
+    <div class="">
+        <input class="btn btn-success" type="button" value="Search" onclick="getObjId()" />
 
     </div>
+</div><br />*@
 
 
-</div>
-
-
-
-    }*@
-
-
-<div>
-    @Html.ActionLink("Download_PDF", "ExportDueAmountReport", "Reporting", new { @class = "btn btn-primary" }, null)
-</div>
+<br />
+    <div>
+        <button type="button" class="btn btn-warning"> @Html.ActionLink("Download Report", "ExportDueAmountReport", "Reporting", new { @class = "btn btn-primary" }, null) </button>
+    </div>
+<br />
 
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.PayDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceNo)
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.ClientName)
@@ -131,7 +55,6 @@
         <th>
             @Html.DisplayNameFor(model => model.PaidAmount)
         </th>
-        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
@@ -140,27 +63,41 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PayDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNo)
-            </td>
             @*<td>
                 @Html.DisplayNameFor(model => model.ClientName)
             </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>         
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TaskName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PaidAmount)
             </td>
-            @*<td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                </td>*@
         </tr>
     }
 </table>
+
+
+<script>
+        function getObjId() {
+
+            var val = document.getElementById("pId").value;
+            url = '@Url.Action("DueAmountReport", "Reporting" )' + '/';
+            var ul = url.slice(0, 27) + '/' + val;
+
+            window.location.replace(ul);
+        }
+
+
+        function downloadReport() {
+            var val = document.getElementById("pId2").value;
+            url = '@Url.Action("ExportDueAmountReport", "Reporting" )' + '/';
+            var ul = url.slice(0, 33) + '/' + val;
+
+            window.location.replace(ul);
+        }
+
+</script>
 

@@ -4,16 +4,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Monthly Report</h2>
+<div class="row" style="background-color:rgba(150, 199, 201, 0.65)">
+    <h2 class="col-sm-offset-1">Time Base Report</h2>
+</div>
+ <br />
 
 <div class="ui-widget">
     @using (Html.BeginForm())
     {
-        <lable for="Sdate"><strong>Start Date</strong></lable>
-        <input id="Sdate" name="Startdate" type="date"/>
-        <input type="Submit" value="Search"/>
+       <div class="row" >
+           <lable class="col-sm-1" style="width:120px" for="Sdate"><strong>Start Date : </strong></lable>
+           <input class="form-control " id="Sdate" name="Startdate" type="date" />
+          
+       </div>
+
+    <div class="row">
+        <lable class="col-sm-1" style="width:120px" for="Edate"><strong>End Date : </strong></lable>
+        <input class="form-control " id="Edate" name="Enddate" type="date" />
+
+    </div>
+
+    <br />
+
+    <div>
+        <button type="button" class="btn btn-warning" onclick="downloadReport()"> Download Report </button>
+    </div>
     } 
 </div>
+
+<br />
 
 <table class="table">
     <tr>
@@ -24,19 +43,14 @@
             @Html.DisplayNameFor(model => model.ProjectName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClientName)
+            @Html.DisplayNameFor(model => model.TaskName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.BugFixes)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectStatus)
+            @Html.DisplayNameFor(model => model.TaskStatus)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TotalPayment)
         </th>
-        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
@@ -49,23 +63,119 @@
                 @Html.DisplayFor(modelItem => item.ProjectName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
+                @Html.DisplayFor(modelItem => item.TaskName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BugFixes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectStatus)
+                @Html.DisplayFor(modelItem => item.TaskStatus)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPayment)
             </td>
-            @*<td>
-                           @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                           @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                           @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                </td>*@
         </tr>
     }
 
 </table>
+
+
+<script>
+    @*function getObjId() {
+
+        var val = document.getElementById("pId").value;
+        url = '@Url.Action("PaymentHistoryReport", "Reporting" )' + '/';
+        var ul = url.slice(0, 31) + '/' + val;
+
+        window.location.replace(ul);
+    }*@
+
+
+    function downloadReport() {
+        var val1 = document.getElementById("Sdate").value;
+        var val2 = document.getElementById("Edate").value;
+        url = '@Url.Action("ExportMonthlyReport", "Reporting" )' + '/';
+        //var sd = (val1.replaceAll('-', ''));
+        var ul = url.slice(0, 31) + 20210501 ;
+
+        window.location.replace(ul);
+
+        @*var link = "@Url.Action("ExportMonthlyReport", "Reporting", new { sDate = "sd" })";
+        link = link.replace("sd", val);
+        //alert(link);
+        window.location.href = link;*@
+        
+        //var sDate = Number(sd);
+        //console.log(sDate);
+        //console.log(val1);
+        //console.log(ul);
+    }
+
+    @*@Html.ActionLink("Download_PDF", "ExportMonthlyReport", "Reporting", new { @class = "btn btn-primary" }, null)*@
+</script>
+
+
+@*<script language="javascript" type="text/javascript">
+        //val in this case being the value of the ViewBag passed from where the call is occurring
+    function func(val) {
+        var val1 = document.getElementById("Sdate").value;
+            if (val == true) {
+               
+                //{
+                //    $.ajax({
+                //        url: 'ExportMonthlyReport',
+                //        data: { sDate: val1 },
+                //        type: "GET",
+                //        //success: function () {
+                //        //    alert('Added');
+                //        //}
+                //    });
+                //}
+
+                $.ajax({
+                    url: '@Url.Action("ExportMonthlyReport", "Reporting")',
+                    type: 'GET',
+                    dataType: 'json',
+                    data: { sDate: val1 },
+                    cache: false,
+
+                    success: function () {
+                        
+                            //redirect current page to new view products->action method, jquery->controller.
+                            var link = "@Url.Action("Products", "Jquery", new { categoryid = "catid" })";
+                            link = link.replace("catid", Data.catid);
+                            alert(link);
+                            window.location.href = link;
+
+                        
+                    }
+                });
+            }
+        }
+</script>*@
+
+@*<script type="text/javascript">
+    $(function () {
+
+        $('#lst_categories').change(function () {
+
+           var catid = $('#lst_categories :selected').val();
+
+           $.ajax({
+               url: '@Url.Action("Productsview", "Jquery")',
+               type: 'GET',
+               dataType: 'json',
+               data: { categoryid: catid },
+               cache: false,
+
+               success: function (Data) {
+                   if (Data.ok) {
+                      //redirect current page to new view products->action method, jquery->controller.
+                       var link = "@Url.Action("Products", "Jquery", new { categoryid = "catid" })";
+                       link = link.replace("catid", Data.catid);
+                       alert(link);
+                       window.location.href = link;
+
+                   }
+               }
+           });
+        });
+    });
+</script>*@

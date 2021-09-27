@@ -4,76 +4,103 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Payment History Report</h2>
+<div class="row" style="background-color:rgba(150, 199, 201, 0.65)">
+    <h2 class="col-md-6">Payment History Report</h2>
 
-<br /> <br />
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-6 col-lg-3" style="padding-left:15px">
+            @Html.DropDownList("ProjectId", null, "All Projects", htmlAttributes: new { @class = "form-control", @selected = "-1", @id = "pId2" })
 
-
-<div>
-    @Html.ActionLink("Download_PDF", "ExportPaymentHistoryReport", "Reporting", new { @class = "btn btn-primary" }, null)
+        </div>
+        <div>
+            <button type="button" class="btn btn-warning" onclick="downloadReport()"> Download Report </button>
+        </div>
+    </div>
 </div>
 
 
-<br /><br />
 
-<table class="table">
+<br />
+<div class="row" style="margin-bottom:15px">
+    <div class="col-xs-6 col-lg-3" style="padding-left:15px">
+        @Html.DropDownList("ProjectId", null, "All Projects", htmlAttributes: new { @class = "form-control", @selected = "-1", @id = "pId" })
 
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PayDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InvoiceNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaskName)
-        </th>       
-        <th>
-            @Html.DisplayNameFor(model => model.PayMethod)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentAmount)
-        </th>
-        @*<th></th>*@
-    </tr>
-    @foreach (var item in Model)
-    {
+    </div>
+    <div class="">
+        <input class="btn btn-success" type="button" value="Search" onclick="getObjId()" />
+
+    </div>
+</div>
+
+
+    <table class="table">
+
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InvoiceNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskName)
-            </td>          
-            <td>
-                @Html.DisplayFor(modelItem => item.PayMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentAmount)
-            </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info btn-sm" }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-warning btn-sm" })
-            </td>*@
+            <th>
+                @Html.DisplayNameFor(model => model.PayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentAmount)
+            </th>
         </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaskName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentAmount)
+                </td>
+            </tr>
 
-    }
+        }
 
 
-</table>
+    </table>
+
+
+    <script>
+        function getObjId() {
+
+            var val = document.getElementById("pId").value;
+            url = '@Url.Action("PaymentHistoryReport", "Reporting" )' + '/';
+            var ul = url.slice(0, 31) + '/' + val;
+
+            window.location.replace(ul);
+        }
+
+
+        function downloadReport() {
+            var val = document.getElementById("pId2").value;
+            url = '@Url.Action("ExportPaymentHistoryReport", "Reporting" )' + '/';
+            var ul = url.slice(0, 38) + '/' + val;
+
+            window.location.replace(ul);
+        }
+
+    </script>

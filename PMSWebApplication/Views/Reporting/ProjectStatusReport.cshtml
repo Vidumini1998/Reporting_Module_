@@ -4,65 +4,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Project Status Report</h2>
+<div class="row" style="background-color:rgba(150, 199, 201, 0.65)">
+    <h2 class="col-md-6">Project Status Report</h2>
 
-@using (Ajax.BeginForm("ProjectStatusReport", "Reporting", FormMethod.Post,
-                    new AjaxOptions
-                    {
-                        InsertionMode = InsertionMode.Replace,
-                        HttpMethod = "POST",
-                        UpdateTargetId = "search-results"
-                    }))
-{
-    <div>
-        @Html.TextBox("status")
-        <input type="submit" value="Search" />
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-6 col-lg-3" style="padding-left:15px"></div>
     </div>
-}
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Deadline)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmployeeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProjectStatus)
-        </th>
-        @*<th></th>*@
-    </tr>
+<br />
 
-    @foreach (var item in Model)
-    {
+<div>
+    <button type="button" class="btn btn-warning" onclick="downloadReport()"> Download Report </button>
+</div>
+
+<br />
+
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Deadline)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClientName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmployeeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProjectStatus)
-            </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-           </td>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Deadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmployeeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProjectStatus)
+            </th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Deadline)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProjectStatus)
+                </td>           
+            </tr>
+        }
+    </table>

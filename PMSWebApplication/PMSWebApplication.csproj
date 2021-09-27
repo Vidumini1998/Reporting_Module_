@@ -296,7 +296,6 @@
     <Compile Include="Models\IncomeReport.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MonthlyReport.cs" />
-    <Compile Include="Models\PayReport.cs" />
     <Compile Include="Models\PaymentHistoryReport.cs" />
     <Compile Include="Models\PriorityReport.cs" />
     <Compile Include="Models\ProjectStatusReport.cs" />
@@ -309,6 +308,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DueAmountReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\MonthlyReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonthlyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\PaymentHistoryReport.cs">
@@ -335,6 +340,12 @@
       <DependentUpon>TaskReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\UpcomingPaymentReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpcomingPaymentReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Scripts\PriorityReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -344,7 +355,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Background\minimalism-hong-kong-vector-the-city-river-hd-wallpaper-preview.jpg" />
+    <Content Include="Content\Background\4445.jpg" />
+    <Content Include="Content\Background\b.jpeg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -518,6 +530,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>DueAmountReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\MonthlyReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MonthlyReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\PaymentHistoryReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PaymentHistoryReport.cs</LastGenOutput>
@@ -533,6 +549,10 @@
     <EmbeddedResource Include="Reports\TaskReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TaskReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\UpcomingPaymentReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>UpcomingPaymentReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Scripts\PriorityReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
